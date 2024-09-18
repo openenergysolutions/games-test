@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./python-openfmb-ops-protobuf/openfmb"
+    ]
+}
