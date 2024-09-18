@@ -6,6 +6,7 @@ import uuid
 import sys
 sys.path.append(os.path.abspath('python-openfmb-ops-protobuf/openfmb'))
 import solarmodule.solarmodule_pb2 as solar
+import commonmodule.commonmodule_pb2 as common
 
 nats_url = "nats://127.0.0.1:4222"
 solar_mrid = "7e821d42-4e11-4d7f-be4a-f741f2d741e9"
@@ -72,19 +73,27 @@ async def send_curve_points():
         profile = solar.SolarControlProfile()
         profile.controlMessageInfo.messageInfo.identifiedObject.mRID.value = str(uuid.uuid4())
         profile.controlMessageInfo.messageInfo.messageTimeStamp.seconds = seconds
-        profile.solarInverter.conductingEquipment.mRID = solar_mrid
-
-        pt = solar.SolarPoint()
-        pt.control.voltVarOperation.crvPts.append();
-
-        profile.solarControl.solcarControlFSCC.SolarControlShceduleFSCH.ValDCSG.crvPts.append(pt);
+        profile.solarInverter.conductingEquipment.mRID = solar_mrid     
+ 
+        pt = solar.SolarCurvePoint()
+        curves = pt.control.voltVarOperation.crvPts
+        
 
         for x, y in curve_points:
             print(f"({x}, {y})")
-
+            volt_var_point = common.VoltVarPoint()
+            volt_var_point.voltVal = float(x)
+            volt_var_point.varVal = float(y)
+            curves.append(volt_var_point)  
+            
+        profile.solarControl.solarControlFSCC.SolarControlScheduleFSCH.ValDCSG.crvPts.append(pt)
+        
         # publish the message
         nc = await nats.connect(nats_url)
         await nc.publish("openfmb.solarmodule.SolarControlProfile.{solar_mrid}", profile.SerializeToString())
+
+        # wait a bit
+        await asyncio.sleep(1)
         
         # Simulate sending the curve points
         print("Curve points sent successfully!")
