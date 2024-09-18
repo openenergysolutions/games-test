@@ -76,6 +76,7 @@ async def send_curve_points():
         profile.solarInverter.conductingEquipment.mRID = solar_mrid     
  
         pt = solar.SolarCurvePoint()
+        pt.startTime.seconds = seconds + 1
         curves = pt.control.voltVarOperation.crvPts
         
 
@@ -87,7 +88,7 @@ async def send_curve_points():
             curves.append(volt_var_point)  
             
         profile.solarControl.solarControlFSCC.SolarControlScheduleFSCH.ValDCSG.crvPts.append(pt)
-        
+
         # publish the message
         nc = await nats.connect(nats_url)
         await nc.publish("openfmb.solarmodule.SolarControlProfile.{solar_mrid}", profile.SerializeToString())
