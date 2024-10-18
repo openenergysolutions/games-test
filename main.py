@@ -101,6 +101,41 @@ async def send_curve_points():
     else:
         print("No curve points were added.")
 
+async def send_forecast():
+    ts = time.time()
+    seconds = int(ts)
+    
+    # Create SolarControlProfile message
+    profile = solar.SolarControlProfile()
+    profile.controlMessageInfo.messageInfo.identifiedObject.mRID.value = str(uuid.uuid4())
+    profile.controlMessageInfo.messageInfo.messageTimeStamp.seconds = seconds
+    profile.solarInverter.conductingEquipment.mRID = solar_mrid
+
+    # Create SolarForecast using a list of SchedulePoint(s)
+    # some random forecast points
+    for i in range(1, 5):
+        point = common.SchedulePoint()
+        point.startTime.seconds = seconds + i
+
+        # power
+        param = common.ENG_ScheduleParameter()
+        param.value = i * 100
+        param.scheduleParameterType = 40 # w_net_mag
+        point.scheduleParameter.append(param)
+
+        # add more parameters if needed
+
+        profile.solarControl.solarControlFSCC.controlFSCC.controlScheduleFSCH.ValACSG.schPts.append(point)
+
+    # publish the message
+    nc = await nats.connect(nats_url)
+    await nc.publish("openfmb.solarmodule.SolarControlProfile.{solar_mrid}", profile.SerializeToString())
+
+    # wait a bit
+    await asyncio.sleep(1)
+
+    # Simulate sending the forecast
+    print("Forecast sent successfully!")
 
 async def main():
     setpoints = None
@@ -109,8 +144,9 @@ async def main():
         print("1. Reading profile")
         print("2. Status profile")
         print("3. Send Curve Points")
-        print("4. Exit")
-        choice = input("Enter your choice (1-4): ")
+        print("4. Send Forecast")
+        print("5. Exit")
+        choice = input("Enter your choice (1-5): ")
 
         if choice == '1':
             await reading()
@@ -119,6 +155,8 @@ async def main():
         elif choice == '3':
             await send_curve_points()
         elif choice == '4':
+            await send_forecast()
+        elif choice == '5':
             print("Exiting...")
             break
         else:
