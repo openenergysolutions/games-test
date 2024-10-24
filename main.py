@@ -81,13 +81,22 @@ async def send_curve_points():
         
 
         for x, y in curve_points:
-            print(f"({x}, {y})")
-            volt_var_point = common.VoltVarPoint()
-            volt_var_point.voltVal = float(x)
-            volt_var_point.varVal = float(y)
-            curves.append(volt_var_point)  
-            
-        profile.solarControl.solarControlFSCC.SolarControlScheduleFSCH.ValDCSG.crvPts.append(pt)
+            print(f"({x}, {y})")            
+            point = common.SchedulePoint()
+            point.startTime.seconds = seconds
+
+            # power
+            param = common.ENG_ScheduleParameter()
+            param.value = float(x)
+            param.scheduleParameterType = 15 # phv_net_mag
+            point.scheduleParameter.append(param)
+
+            param2 = common.ENG_ScheduleParameter()
+            param2.value = float(y)
+            param2.scheduleParameterType = 35 # var_net_mag
+            point.scheduleParameter.append(param2)
+
+            profile.solarControl.solarControlFSCC.controlFSCC.controlScheduleFSCH.ValACSG.schPts.append(point) 
 
         # publish the message
         nc = await nats.connect(nats_url)
