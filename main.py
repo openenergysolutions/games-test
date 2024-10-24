@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath('python-openfmb-ops-protobuf/openfmb'))
 import solarmodule.solarmodule_pb2 as solar
 import commonmodule.commonmodule_pb2 as common
 
-nats_url = "nats://127.0.0.1:4222"
+nats_url = "nats://client:pzwa3prf@127.0.0.1:4222"
 solar_mrid = "7e821d42-4e11-4d7f-be4a-f741f2d741e9"
 
 running = True
@@ -26,7 +26,7 @@ async def reading():
         print(f"Received solar reading: {profile}")
         running = False
 
-    await nc.subscribe(f"openfmb.solarmodule.SolarReadingProfile.{solar_mrid}", cb=message_handler)
+    await nc.subscribe("openfmb.solarmodule.SolarReadingProfile.{solar_mrid}", cb=message_handler)
 
     while running:
         await asyncio.sleep(1)
@@ -45,7 +45,7 @@ async def status():
         print(f"Received solar status: {profile}")
         running = False
 
-    await nc.subscribe(f"openfmb.solarmodule.SolarStatusProfile.{solar_mrid}", cb=message_handler)
+    await nc.subscribe("openfmb.solarmodule.SolarStatusProfile.{solar_mrid}", cb=message_handler)
 
     while running:
         await asyncio.sleep(1)
@@ -137,6 +137,24 @@ async def send_forecast():
     # Simulate sending the forecast
     print("Forecast sent successfully!")
 
+async def reading_forecast():
+    nc = await nats.connect(nats_url)
+    global running  
+
+    running = True  
+
+    async def message_handler2(msg):
+        global running
+        profile = solar.SolarControlProfile()
+        profile.ParseFromString(msg.data)
+        print(f"Received solar control: {profile}")
+        running = False
+
+    await nc.subscribe("openfmb.solarmodule.SolarControlProfile.{solar_mrid}", cb=message_handler2)
+
+    while running:
+        await asyncio.sleep(1)
+
 async def main():
     setpoints = None
     while True:
@@ -145,8 +163,9 @@ async def main():
         print("2. Status profile")
         print("3. Send Curve Points")
         print("4. Send Forecast")
-        print("5. Exit")
-        choice = input("Enter your choice (1-5): ")
+        print("5. Reading Forecast")
+        print("6. Exit")
+        choice = input("Enter your choice (1-6): ")
 
         if choice == '1':
             await reading()
@@ -157,6 +176,8 @@ async def main():
         elif choice == '4':
             await send_forecast()
         elif choice == '5':
+            await reading_forecast()
+        elif choice == '6':
             print("Exiting...")
             break
         else:
