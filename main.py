@@ -8,8 +8,8 @@ sys.path.append(os.path.abspath('python-openfmb-ops-protobuf/openfmb'))
 import solarmodule.solarmodule_pb2 as solar
 import commonmodule.commonmodule_pb2 as common
 
-nats_url = "nats://client:pzwa3prf@127.0.0.1:4222"
-solar_mrid = "7e821d42-4e11-4d7f-be4a-f741f2d741e9"
+nats_url = "nats://client:pzwa3prf@192.168.86.39:4222"
+solar_mrid = "97e1fa97-6915-4608-8ab5-0cd05b11cd11"
 
 running = True
 
@@ -26,7 +26,7 @@ async def reading():
         print(f"Received solar reading: {profile}")
         running = False
 
-    await nc.subscribe("openfmb.solarmodule.SolarReadingProfile.{solar_mrid}", cb=message_handler)
+    await nc.subscribe(f"openfmb.solarmodule.SolarReadingProfile.{solar_mrid}", cb=message_handler)
 
     while running:
         await asyncio.sleep(1)
@@ -45,7 +45,7 @@ async def status():
         print(f"Received solar status: {profile}")
         running = False
 
-    await nc.subscribe("openfmb.solarmodule.SolarStatusProfile.{solar_mrid}", cb=message_handler)
+    await nc.subscribe(f"openfmb.solarmodule.SolarStatusProfile.{solar_mrid}", cb=message_handler)
 
     while running:
         await asyncio.sleep(1)
@@ -100,7 +100,7 @@ async def send_curve_points():
 
         # publish the message
         nc = await nats.connect(nats_url)
-        await nc.publish("openfmb.solarmodule.SolarControlProfile.{solar_mrid}", profile.SerializeToString())
+        await nc.publish(f"openfmb.solarmodule.SolarControlProfile.{solar_mrid}", profile.SerializeToString())
 
         # wait a bit
         await asyncio.sleep(1)
@@ -138,7 +138,7 @@ async def send_forecast():
 
     # publish the message
     nc = await nats.connect(nats_url)
-    await nc.publish("openfmb.solarmodule.SolarControlProfile.{solar_mrid}", profile.SerializeToString())
+    await nc.publish(f"openfmb.solarmodule.SolarControlProfile.{solar_mrid}", profile.SerializeToString())
 
     # wait a bit
     await asyncio.sleep(1)
@@ -159,7 +159,7 @@ async def reading_forecast():
         print(f"Received solar control: {profile}")
         running = False
 
-    await nc.subscribe("openfmb.solarmodule.SolarControlProfile.{solar_mrid}", cb=message_handler2)
+    await nc.subscribe(f"openfmb.solarmodule.SolarControlProfile.{solar_mrid}", cb=message_handler2)
 
     while running:
         await asyncio.sleep(1)
