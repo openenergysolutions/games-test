@@ -1,3 +1,0 @@
-[submodule "python-openfmb-ops-protobuf"]
-	path = python-openfmb-ops-protobuf
-	url = https://gitlab.com/openfmb/psm/ops/protobuf/python-openfmb-ops-protobuf.git
