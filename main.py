@@ -195,7 +195,7 @@ async def evse_set_max_active_power():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     crvPts.control.limitWOperation.wMaxSptVal = max_active_power
 
     # Publish the message
@@ -221,6 +221,7 @@ async def evse_set_voltage_reactive_power_curve_points():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
+    crvPts.startTime.seconds = int(time.time())
 
     if curve_points:
         print("Sending the following curve points:") 
@@ -245,7 +246,7 @@ async def evse_set_reference_voltage():
 
     dese = profile.evseControl.controlDESE.add()
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     crvPts.control.voltVarOperation.vVarParameter.VRef = reference_voltage
 
     # Publish the message
@@ -262,7 +263,7 @@ async def evse_set_response_time_to_ramp_up_reactive_power():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     crvPts.control.voltVarOperation.vVarParameter.OplTmmsMax.seconds = response_time
 
     # Publish the message
@@ -290,6 +291,7 @@ async def evse_set_voltage_active_power_curve_points():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
+    crvPts.startTime.seconds = int(time.time())
 
     if curve_points:
         print("Sending the following curve points:")
@@ -315,7 +317,7 @@ async def evse_set_response_time_to_ramp_up_active_power():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     crvPts.control.voltWOperation.voltWParameter.OplTmmsMax.seconds = response_time
 
     # Publish the message
@@ -332,7 +334,7 @@ async def evse_set_constant_reactive_power_setting():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     crvPts.control.vArOperation.varParameter.varTgtSpt = constant_reactive_power
 
     # Publish the message
@@ -349,7 +351,7 @@ async def evse_set_constant_power_factor_setting():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     crvPts.control.pFOperation.pFParameter.pFGnTgtMxVal = constant_power_factor
 
     # Publish the message
@@ -403,7 +405,7 @@ async def evse_set_limit_active_power_enable():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     if limit_active_power_enable == 'no':
         crvPts.control.limitWOperation.maxLimParameter.modEna = False
     else:
@@ -423,7 +425,7 @@ async def evse_set_enable_disable_autonomous_vref_adjustment():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     if enable_disable_autonomous_vref_adjustment == 'no':
         crvPts.control.voltVarOperation.vVarParameter.VRefAdjEna = False
     else:
@@ -443,7 +445,7 @@ async def evse_set_enable_voltage_reactive_power_mode():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     if enable_voltage_reactive_power_mode == 'no':
         crvPts.control.voltVarOperation.vVarParameter.modEna = False
     else:
@@ -463,7 +465,7 @@ async def evse_set_enable_voltage_active_power_mode():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     if enable_voltage_active_power_mode == 'no':
         crvPts.control.voltWOperation.voltWParameter.modEna = False
     else:
@@ -483,7 +485,7 @@ async def evse_set_enable_constant_reactive_power_mode():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     if enable_constant_reactive_power_mode == 'no':
         crvPts.control.vArOperation.modEna = False
     else:
@@ -503,7 +505,7 @@ async def evse_set_enable_constant_power_factor_mode():
     dese = profile.evseControl.controlDESE.add()
 
     crvPts = dese.deseControlScheduleFSCH.ValDCSG.crvPts.add()
-
+    crvPts.startTime.seconds = int(time.time())
     if enable_constant_power_factor_mode == 'no':
         crvPts.control.pFOperation.pFParameter.modEna = False
     else:
