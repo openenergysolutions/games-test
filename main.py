@@ -7,9 +7,11 @@ import sys
 sys.path.append(os.path.abspath('openfmb'))
 import solarmodule.solarmodule_pb2 as solar
 import evsemodule.evsemodule_pb2 as evse
+import essmodule.essmodule_pb2 as ess
 import commonmodule.commonmodule_pb2 as common
+from google.protobuf.json_format import MessageToJson
 
-nats_url = "nats://192.168.86.51:4222"
+nats_url = "nats://192.168.86.73:4222"
 solar_mrid = "97e1fa97-6915-4608-8ab5-0cd05b11cd11"
 evse_mrid = "7f590280-6154-4258-89e0-2babb69fbe74"
 
@@ -23,9 +25,11 @@ async def reading():
 
     async def message_handler(msg):
         global running
-        profile = solar.SolarReadingProfile()
-        profile.ParseFromString(msg.data)
-        print(f"Received solar reading: {profile}")
+        print(f"Received solar reading: {msg}")
+        profile = solar.SolarReadingProfile()        
+        profile.ParseFromString(msg.data)       
+        json_string = MessageToJson(profile)
+        print(json_string)
         running = False
 
     await nc.subscribe(f"openfmb.solarmodule.SolarReadingProfile.{solar_mrid}", cb=message_handler)
@@ -165,6 +169,26 @@ async def reading_forecast():
 
     while running:
         await asyncio.sleep(1)
+
+def create_solar_control_profile():
+    ts = time.time()
+    seconds = int(ts)
+
+    # Create SolarControlProfile message
+    profile = solar.SolarControlProfile()
+    profile.controlMessageInfo.messageInfo.identifiedObject.mRID.value = str(uuid.uuid4())
+    profile.controlMessageInfo.messageInfo.messageTimeStamp.seconds = seconds
+    profile.solarInverter.conductingEquipment.mRID = solar_mrid
+
+    return profile
+
+async def publish_solar_control_profile(profile):
+    # publish the message
+    nc = await nats.connect(nats_url)
+    await nc.publish(f"openfmb.solarmodule.SolarControlProfile.{solar_mrid}", profile.SerializeToString())
+
+    # wait a bit
+    await asyncio.sleep(1)
 
 def create_evse_control_profile():
     ts = time.time()
@@ -514,6 +538,25 @@ async def evse_set_enable_constant_power_factor_mode():
     # Publish the message
     await publish_evse_control_profile(profile)
 
+async def solar_set_reference_voltage():
+    profile = create_solar_control_profile()
+
+    # Set reference voltage
+    reference_voltage = float(input("Enter reference voltage: "))
+
+    # SolarControlProfile.solarControl.solarControlFSCC.SolarControlScheduleFSCH.ValDCSG.crvPts[0].control.voltVarOperation.vVarParameter.VRef
+
+    crvPts = profile.solarControl.solarControlFSCC.SolarControlScheduleFSCH.ValDCSG.crvPts.add()
+    crvPts.startTime.seconds = int(time.time())
+    crvPts.control.voltVarOperation.vVarParameter.VRef = reference_voltage
+
+    # Explicitly set modEna and VRefAdjEna
+    crvPts.control.voltVarOperation.vVarParameter.modEna = True
+    crvPts.control.voltVarOperation.vVarParameter.VRefAdjEna = False
+
+    # Publish the message
+    await publish_solar_control_profile(profile)
+
 async def main():
     setpoints = None
     while True:
@@ -540,6 +583,8 @@ async def main():
         print("19. Enable voltage-active power mode")
         print("20. Enable constant reactive power mode")
         print("21. Enable constant power factor mode")
+        # begin Solar       
+        print("23. Solar Reference voltage (VRef)")
         print("100. Exit")
         choice = input("Enter your choice (1-21) or 100 to exit: ")
 
@@ -586,6 +631,9 @@ async def main():
             await evse_set_enable_constant_reactive_power_mode()
         elif choice == '21':
             await evse_set_enable_constant_power_factor_mode()
+        # begin Solar
+        elif choice == '23':
+            await solar_set_reference_voltage()
         # Exiting
         elif choice == '100':
             print("Exiting...")

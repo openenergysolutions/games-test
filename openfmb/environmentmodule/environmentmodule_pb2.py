@@ -15,10 +15,11 @@ import uml_pb2 as uml__pb2
 from commonmodule import commonmodule_pb2 as commonmodule_dot_commonmodule__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)environmentmodule/environmentmodule.proto\x12\x11\x65nvironmentmodule\x1a\tuml.proto\x1a\x1f\x63ommonmodule/commonmodule.proto\"\xa8\x01\n\x12\x45nvironmentReading\x12\x62\n\"conductingEquipmentTerminalReading\x18\x01 \x01(\x0b\x32\x30.commonmodule.ConductingEquipmentTerminalReadingB\x04\x80\xb5\x18\x01\x12.\n\x0breadingMENV\x18\x02 \x01(\x0b\x32\x19.commonmodule.ReadingMENV\"\xe2\x01\n\x19\x45nvironmentReadingProfile\x12\x42\n\x12readingMessageInfo\x18\x01 \x01(\x0b\x32 .commonmodule.ReadingMessageInfoB\x04\x80\xb5\x18\x01\x12.\n\x06sensor\x18\x02 \x01(\x0b\x32\x14.commonmodule.SensorB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\x12K\n\x12\x65nvironmentReading\x18\x03 \x01(\x0b\x32%.environmentmodule.EnvironmentReadingB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01:\x04\xc0\xf3\x18\x01\x42\x93\x01\n\x19openfmb.environmentmoduleP\x01ZXgitlab.com/openfmb/psm/ops/protobuf/go-openfmb-ops-protobuf/v2/openfmb/environmentmodule\xaa\x02\x19openfmb.environmentmoduleb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)environmentmodule/environmentmodule.proto\x12\x11\x65nvironmentmodule\x1a\tuml.proto\x1a\x1f\x63ommonmodule/commonmodule.proto\"\xd8\x01\n\x12\x45nvironmentReading\x12\x62\n\"conductingEquipmentTerminalReading\x18\x01 \x01(\x0b\x32\x30.commonmodule.ConductingEquipmentTerminalReadingB\x04\x80\xb5\x18\x01\x12.\n\x0breadingMENV\x18\x02 \x01(\x0b\x32\x19.commonmodule.ReadingMENV\x12.\n\x0breadingMMET\x18\x03 \x01(\x0b\x32\x19.commonmodule.ReadingMMET\"\xe2\x01\n\x19\x45nvironmentReadingProfile\x12\x42\n\x12readingMessageInfo\x18\x01 \x01(\x0b\x32 .commonmodule.ReadingMessageInfoB\x04\x80\xb5\x18\x01\x12.\n\x06sensor\x18\x02 \x01(\x0b\x32\x14.commonmodule.SensorB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\x12K\n\x12\x65nvironmentReading\x18\x03 \x01(\x0b\x32%.environmentmodule.EnvironmentReadingB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01:\x04\xc0\xf3\x18\x01\x42\x93\x01\n\x19openfmb.environmentmoduleP\x01ZXgitlab.com/openfmb/psm/ops/protobuf/go-openfmb-ops-protobuf/v2/openfmb/environmentmodule\xaa\x02\x19openfmb.environmentmoduleb\x06proto3')
 
-_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'environmentmodule.environmentmodule_pb2', globals())
+_globals = globals()
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'environmentmodule.environmentmodule_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
@@ -33,8 +34,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _ENVIRONMENTREADINGPROFILE.fields_by_name['environmentReading']._serialized_options = b'\210\265\030\001\220\265\030\001'
   _ENVIRONMENTREADINGPROFILE._options = None
   _ENVIRONMENTREADINGPROFILE._serialized_options = b'\300\363\030\001'
-  _ENVIRONMENTREADING._serialized_start=109
-  _ENVIRONMENTREADING._serialized_end=277
-  _ENVIRONMENTREADINGPROFILE._serialized_start=280
-  _ENVIRONMENTREADINGPROFILE._serialized_end=506
+  _globals['_ENVIRONMENTREADING']._serialized_start=109
+  _globals['_ENVIRONMENTREADING']._serialized_end=325
+  _globals['_ENVIRONMENTREADINGPROFILE']._serialized_start=328
+  _globals['_ENVIRONMENTREADINGPROFILE']._serialized_end=554
 # @@protoc_insertion_point(module_scope)

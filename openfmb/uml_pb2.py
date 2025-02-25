@@ -16,8 +16,9 @@ from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tuml.proto\x12\x03uml\x1a google/protobuf/descriptor.proto:>\n\x15option_parent_message\x12\x1d.google.protobuf.FieldOptions\x18\xd0\x86\x03 \x01(\x08:>\n\x15option_required_field\x12\x1d.google.protobuf.FieldOptions\x18\xd1\x86\x03 \x01(\x08:@\n\x17option_multiplicity_min\x12\x1d.google.protobuf.FieldOptions\x18\xd2\x86\x03 \x01(\x05:@\n\x17option_multiplicity_max\x12\x1d.google.protobuf.FieldOptions\x18\xd3\x86\x03 \x01(\x05:4\n\x0boption_uuid\x12\x1d.google.protobuf.FieldOptions\x18\xd4\x86\x03 \x01(\x08:3\n\noption_key\x12\x1d.google.protobuf.FieldOptions\x18\xd5\x86\x03 \x01(\x08:A\n\x16option_openfmb_profile\x12\x1f.google.protobuf.MessageOptions\x18\xb8\x8e\x03 \x01(\x08\x42]\n\x07openfmbP\x01ZFgitlab.com/openfmb/psm/ops/protobuf/go-openfmb-ops-protobuf/v2/openfmb\xaa\x02\x07openfmbb\x06proto3')
 
-_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'uml_pb2', globals())
+_globals = globals()
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'uml_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   google_dot_protobuf_dot_descriptor__pb2.FieldOptions.RegisterExtension(option_parent_message)
   google_dot_protobuf_dot_descriptor__pb2.FieldOptions.RegisterExtension(option_required_field)

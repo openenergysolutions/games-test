@@ -18,8 +18,9 @@ from commonmodule import commonmodule_pb2 as commonmodule_dot_commonmodule__pb2
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1interconnectionmodule/interconnectionmodule.proto\x12\x15interconnectionmodule\x1a\tuml.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1f\x63ommonmodule/commonmodule.proto\"\xa5\x04\n\x14InterconnectionPoint\x12\x33\n\x11\x62lackStartEnabled\x18\x01 \x01(\x0b\x32\x18.commonmodule.ControlSPC\x12:\n\x18\x66requencySetPointEnabled\x18\x02 \x01(\x0b\x32\x18.commonmodule.ControlSPC\x12(\n\x06island\x18\x03 \x01(\x0b\x32\x18.commonmodule.ControlSPC\x12/\n\npctHzDroop\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12.\n\tpctVDroop\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12)\n\trampRates\x18\x06 \x01(\x0b\x32\x16.commonmodule.RampRate\x12<\n\x1areactivePwrSetPointEnabled\x18\x07 \x01(\x0b\x32\x18.commonmodule.ControlSPC\x12\x38\n\x16realPwrSetPointEnabled\x18\x08 \x01(\x0b\x32\x18.commonmodule.ControlSPC\x12\x38\n\x16voltageSetPointEnabled\x18\t \x01(\x0b\x32\x18.commonmodule.ControlSPC\x12\x34\n\tstartTime\x18\n \x01(\x0b\x32\x17.commonmodule.TimestampB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\"[\n\x12InterconnectionCSG\x12\x45\n\x06\x63rvPts\x18\x01 \x03(\x0b\x32+.interconnectionmodule.InterconnectionPointB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\"j\n\"InterconnectionControlScheduleFSCH\x12\x44\n\x07ValDCSG\x18\x01 \x01(\x0b\x32).interconnectionmodule.InterconnectionCSGB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\"\xc0\x01\n\x1bInterconnectionScheduleFSCC\x12\x34\n\x0b\x63ontrolFSCC\x18\x01 \x01(\x0b\x32\x19.commonmodule.ControlFSCCB\x04\x80\xb5\x18\x01\x12k\n\"interconnectionControlScheduleFSCH\x18\x02 \x03(\x0b\x32\x39.interconnectionmodule.InterconnectionControlScheduleFSCHB\x04\x90\xb5\x18\x00\"\xea\x01\n\x17InterconnectionSchedule\x12>\n\x10identifiedObject\x18\x01 \x01(\x0b\x32\x1e.commonmodule.IdentifiedObjectB\x04\x80\xb5\x18\x01\x12,\n\x05\x63heck\x18\x02 \x01(\x0b\x32\x1d.commonmodule.CheckConditions\x12\x61\n\x1binterconnectionScheduleFSCC\x18\x03 \x01(\x0b\x32\x32.interconnectionmodule.InterconnectionScheduleFSCCB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\"\xb1\x03\n%InterconnectionPlannedScheduleProfile\x12\x42\n\x12\x63ontrolMessageInfo\x18\x01 \x01(\x0b\x32 .commonmodule.ControlMessageInfoB\x04\x80\xb5\x18\x01\x12Q\n\x1erequesterCircuitSegmentService\x18\x02 \x01(\x0b\x32\x1f.commonmodule.ApplicationSystemB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\x12Y\n\x17interconnectionSchedule\x18\x03 \x01(\x0b\x32..interconnectionmodule.InterconnectionScheduleB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\x12=\n\x08tiePoint\x18\x04 \x01(\x0b\x32!.commonmodule.ConductingEquipmentB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\x12Q\n\x1eresponderCircuitSegmentService\x18\x05 \x01(\x0b\x32\x1f.commonmodule.ApplicationSystemB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01:\x04\xc0\xf3\x18\x01\"\xb3\x03\n\'InterconnectionRequestedScheduleProfile\x12\x42\n\x12\x63ontrolMessageInfo\x18\x01 \x01(\x0b\x32 .commonmodule.ControlMessageInfoB\x04\x80\xb5\x18\x01\x12Q\n\x1erequesterCircuitSegmentService\x18\x02 \x01(\x0b\x32\x1f.commonmodule.ApplicationSystemB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\x12Y\n\x17interconnectionSchedule\x18\x03 \x01(\x0b\x32..interconnectionmodule.InterconnectionScheduleB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\x12=\n\x08tiePoint\x18\x04 \x01(\x0b\x32!.commonmodule.ConductingEquipmentB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01\x12Q\n\x1eresponderCircuitSegmentService\x18\x05 \x01(\x0b\x32\x1f.commonmodule.ApplicationSystemB\x08\x88\xb5\x18\x01\x90\xb5\x18\x01:\x04\xc0\xf3\x18\x01\x42\x9f\x01\n\x1dopenfmb.interconnectionmoduleP\x01Z\\gitlab.com/openfmb/psm/ops/protobuf/go-openfmb-ops-protobuf/v2/openfmb/interconnectionmodule\xaa\x02\x1dopenfmb.interconnectionmoduleb\x06proto3')
 
-_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'interconnectionmodule.interconnectionmodule_pb2', globals())
+_globals = globals()
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'interconnectionmodule.interconnectionmodule_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
@@ -62,18 +63,18 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _INTERCONNECTIONREQUESTEDSCHEDULEPROFILE.fields_by_name['responderCircuitSegmentService']._serialized_options = b'\210\265\030\001\220\265\030\001'
   _INTERCONNECTIONREQUESTEDSCHEDULEPROFILE._options = None
   _INTERCONNECTIONREQUESTEDSCHEDULEPROFILE._serialized_options = b'\300\363\030\001'
-  _INTERCONNECTIONPOINT._serialized_start=153
-  _INTERCONNECTIONPOINT._serialized_end=702
-  _INTERCONNECTIONCSG._serialized_start=704
-  _INTERCONNECTIONCSG._serialized_end=795
-  _INTERCONNECTIONCONTROLSCHEDULEFSCH._serialized_start=797
-  _INTERCONNECTIONCONTROLSCHEDULEFSCH._serialized_end=903
-  _INTERCONNECTIONSCHEDULEFSCC._serialized_start=906
-  _INTERCONNECTIONSCHEDULEFSCC._serialized_end=1098
-  _INTERCONNECTIONSCHEDULE._serialized_start=1101
-  _INTERCONNECTIONSCHEDULE._serialized_end=1335
-  _INTERCONNECTIONPLANNEDSCHEDULEPROFILE._serialized_start=1338
-  _INTERCONNECTIONPLANNEDSCHEDULEPROFILE._serialized_end=1771
-  _INTERCONNECTIONREQUESTEDSCHEDULEPROFILE._serialized_start=1774
-  _INTERCONNECTIONREQUESTEDSCHEDULEPROFILE._serialized_end=2209
+  _globals['_INTERCONNECTIONPOINT']._serialized_start=153
+  _globals['_INTERCONNECTIONPOINT']._serialized_end=702
+  _globals['_INTERCONNECTIONCSG']._serialized_start=704
+  _globals['_INTERCONNECTIONCSG']._serialized_end=795
+  _globals['_INTERCONNECTIONCONTROLSCHEDULEFSCH']._serialized_start=797
+  _globals['_INTERCONNECTIONCONTROLSCHEDULEFSCH']._serialized_end=903
+  _globals['_INTERCONNECTIONSCHEDULEFSCC']._serialized_start=906
+  _globals['_INTERCONNECTIONSCHEDULEFSCC']._serialized_end=1098
+  _globals['_INTERCONNECTIONSCHEDULE']._serialized_start=1101
+  _globals['_INTERCONNECTIONSCHEDULE']._serialized_end=1335
+  _globals['_INTERCONNECTIONPLANNEDSCHEDULEPROFILE']._serialized_start=1338
+  _globals['_INTERCONNECTIONPLANNEDSCHEDULEPROFILE']._serialized_end=1771
+  _globals['_INTERCONNECTIONREQUESTEDSCHEDULEPROFILE']._serialized_start=1774
+  _globals['_INTERCONNECTIONREQUESTEDSCHEDULEPROFILE']._serialized_end=2209
 # @@protoc_insertion_point(module_scope)
